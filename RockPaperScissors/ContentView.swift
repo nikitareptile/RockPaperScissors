@@ -25,20 +25,32 @@ struct ContentView: View {
                 .font(.title)
                 .fontWeight(.semibold)
             Spacer()
-            HStack {
-                Spacer()
-                VStack {
-                    Text("✊")
-                        .font(.system(size: 100))
-                    Text("You")
+            ZStack {
+                Circle()
+                    .foregroundColor(.green)
+                HStack {
+                    Spacer()
+                    VStack {
+                        Text("✊")
+                            .font(.system(size: 120))
+                            .padding(.bottom)
+                        Text("You")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                    }
+                    Spacer()
+                    VStack {
+                        Text("✌️")
+                            .font(.system(size: 120))
+                            .padding(.bottom)
+                        Text("AI")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                    }
+                    Spacer()
                 }
-                Spacer()
-                VStack {
-                    Text("✌️")
-                        .font(.system(size: 100))
-                    Text("Opponent")
-                }
-                Spacer()
             }
             Spacer()
             VStack {
@@ -54,6 +66,7 @@ struct ContentView: View {
                         .font(.system(size: 80))
                     Spacer()
                 }
+                .padding(.bottom)
                 Text("Choose next")
             }
             Spacer()
