@@ -25,9 +25,13 @@ struct ContentView: View {
                 .font(.title)
                 .fontWeight(.semibold)
             Spacer()
+            
             ZStack {
                 Circle()
                     .foregroundColor(.green)
+                Circle()
+                    .foregroundColor(.white)
+                    .scaleEffect(0.9)
                 HStack {
                     Spacer()
                     VStack {
@@ -36,8 +40,8 @@ struct ContentView: View {
                             .padding(.bottom)
                         Text("You")
                             .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color.black)
                     }
                     Spacer()
                     VStack {
@@ -46,13 +50,14 @@ struct ContentView: View {
                             .padding(.bottom)
                         Text("AI")
                             .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color.black)
                     }
                     Spacer()
                 }
             }
             Spacer()
+            
             VStack {
                 HStack {
                     Spacer()
@@ -70,6 +75,7 @@ struct ContentView: View {
                 Text("Choose next")
             }
             Spacer()
+            
             VStack {
                 Text("Current score is \(score)")
                 Text("Your highscore is \(highscore)")
