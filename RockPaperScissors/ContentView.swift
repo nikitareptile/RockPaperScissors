@@ -21,19 +21,24 @@ struct ContentView: View {
                 Text("✌️")
                     .font(.largeTitle)
             }
+            
             Text("The game")
                 .font(.title)
                 .fontWeight(.semibold)
+            
             Spacer()
             
             ZStack {
                 Circle()
                     .foregroundColor(.green)
+                
                 Circle()
                     .foregroundColor(.white)
-                    .scaleEffect(0.9)
+                    .scaleEffect(0.92)
+                
                 HStack {
                     Spacer()
+                    
                     VStack {
                         Text("✊")
                             .font(.system(size: 120))
@@ -43,7 +48,9 @@ struct ContentView: View {
                             .fontWeight(.heavy)
                             .foregroundColor(Color.black)
                     }
+                    
                     Spacer()
+                    
                     VStack {
                         Text("✌️")
                             .font(.system(size: 120))
@@ -53,29 +60,54 @@ struct ContentView: View {
                             .fontWeight(.heavy)
                             .foregroundColor(Color.black)
                     }
+                    
                     Spacer()
                 }
             }
+            
             Spacer()
             
             VStack {
                 HStack {
                     Spacer()
-                    Text("✊")
-                        .font(.system(size: 80))
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("✊")
+                            .font(.system(size: 80))
+                    })
+                    
                     Spacer()
-                    Text("✋")
-                        .font(.system(size: 80))
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("✋")
+                            .font(.system(size: 80))
+                    })
                     Spacer()
-                    Text("✌️")
-                        .font(.system(size: 80))
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("✌️")
+                            .font(.system(size: 80))
+                    })
+                    
                     Spacer()
+                    
                 }
                 .padding(.bottom)
+                
                 Text("Choose next")
             }
+            
             Spacer()
             
+            Divider()
+                .padding(.bottom)
+                
             VStack {
                 Text("Current score is \(score)")
                 Text("Your highscore is \(highscore)")
