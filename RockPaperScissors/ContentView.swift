@@ -18,6 +18,9 @@ struct ContentView: View {
     @State private var result = ""
     @State private var colorOfCircle = Color(.white)
     
+    @State private var aiHandAnimation = false
+    @State private var playerHandAnimation = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -46,6 +49,8 @@ struct ContentView: View {
                         Text(playerHand)
                             .font(.system(size: 120))
                             .padding(.bottom)
+                            .offset(x: playerHandAnimation ? 40 : 0, y: 0)
+                            .rotationEffect(Angle(degrees: playerHandAnimation ? 20 : 0))
                         Text("You")
                             .font(.title)
                             .fontWeight(.heavy)
@@ -55,6 +60,8 @@ struct ContentView: View {
                         Text(aiHand)
                             .font(.system(size: 120))
                             .padding(.bottom)
+                            .offset(x: aiHandAnimation ? -40 : 0, y: 0)
+                            .rotationEffect(Angle(degrees: aiHandAnimation ? -20 : 0))
                         Text("AI")
                             .font(.title)
                             .fontWeight(.heavy)
@@ -67,24 +74,48 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     Button(action: {
+                        withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
+                            aiHandAnimation.toggle()
+                            playerHandAnimation.toggle()
+                        }
                         playerHand = "✊"
                         gameClick()
+                        withAnimation() {
+                            aiHandAnimation.toggle()
+                            playerHandAnimation.toggle()
+                        }
                     }, label: {
                         Text("✊")
                             .font(.system(size: 80))
                     })
                     Spacer()
                     Button(action: {
+                        withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
+                            aiHandAnimation.toggle()
+                            playerHandAnimation.toggle()
+                        }
                         playerHand = "✋"
                         gameClick()
+                        withAnimation() {
+                            aiHandAnimation.toggle()
+                            playerHandAnimation.toggle()
+                        }
                     }, label: {
                         Text("✋")
                             .font(.system(size: 80))
                     })
                     Spacer()
                     Button(action: {
+                        withAnimation(.spring(response: 0.2, dampingFraction: 0.5)) {
+                            aiHandAnimation.toggle()
+                            playerHandAnimation.toggle()
+                        }
                         playerHand = "✌️"
                         gameClick()
+                        withAnimation() {
+                            aiHandAnimation.toggle()
+                            playerHandAnimation.toggle()
+                        }
                     }, label: {
                         Text("✌️")
                             .font(.system(size: 80))
