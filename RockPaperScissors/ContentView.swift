@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     
+    let defaults = UserDefaults.standard
+    
     @State private var score = 0
-    @State private var highscore = 0
+    @State private var localHighscore = 0
     @State private var playerHand = "✊"
     @State private var aiHand = "✌️"
     @State private var result = ""
@@ -66,9 +68,7 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         playerHand = "✊"
-                        compareHands()
-                        winOrLoseColor()
-                        detectHighscore()
+                        gameClick()
                     }, label: {
                         Text("✊")
                             .font(.system(size: 80))
@@ -76,9 +76,7 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         playerHand = "✋"
-                        compareHands()
-                        winOrLoseColor()
-                        detectHighscore()
+                        gameClick()
                     }, label: {
                         Text("✋")
                             .font(.system(size: 80))
@@ -86,9 +84,7 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         playerHand = "✌️"
-                        compareHands()
-                        winOrLoseColor()
-                        detectHighscore()
+                        gameClick()
                     }, label: {
                         Text("✌️")
                             .font(.system(size: 80))
@@ -105,7 +101,7 @@ struct ContentView: View {
                 .padding(.bottom)
             VStack {
                 Text("Current score is \(score)")
-                Text("Your highscore is \(highscore)")
+                Text("Your highscore is " + String(getHighscore()))
             }
         }
         .padding()
@@ -132,27 +128,43 @@ struct ContentView: View {
                 result = "lose"
             }
         }
-        
     }
     
     func winOrLoseColor() {
-        let winColor = Color(.systemGreen)
-        let loseColor = Color(.systemRed)
-        let drawColor = Color(.lightGray)
-        
         if result == "win" {
-            colorOfCircle = winColor
+            colorOfCircle = Color(.systemGreen)
         } else if result == "draw" {
-            colorOfCircle = drawColor
+            colorOfCircle = Color(.lightGray)
         } else {
-            colorOfCircle = loseColor
+            colorOfCircle = Color(.systemRed)
         }
     }
     
-    func detectHighscore() {
-        if score > highscore {
-            highscore += 1
+    func saveHighscoreFrom(currentScore: Int) {
+        if currentScore > getHighscore() {
+            defaults.set(currentScore, forKey: "highscore")
         }
+    }
+    
+    func getHighscore() -> Int {
+        if defaults.integer(forKey: "highscore") != 0 {
+            return defaults.integer(forKey: "highscore")
+        } else {
+            return 0
+        }
+    }
+    
+    func updateLocalHighscore() {
+        if localHighscore < score {
+            localHighscore += 1
+        }
+    }
+    
+    func gameClick() {
+        compareHands()
+        winOrLoseColor()
+        updateLocalHighscore()
+        saveHighscoreFrom(currentScore: localHighscore)
     }
 }
 
