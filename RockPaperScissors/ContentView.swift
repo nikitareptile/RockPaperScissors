@@ -13,9 +13,8 @@ struct ContentView: View {
     @State private var highscore = 0
     @State private var playerHand = "✊"
     @State private var aiHand = "✌️"
-    @State private var result = true
-    private let winColor = Color(.systemGreen)
-    private let loseColor = Color(.systemRed)
+    @State private var result = ""
+    @State private var colorOfCircle = Color(.white)
     
     var body: some View {
         VStack {
@@ -36,7 +35,7 @@ struct ContentView: View {
             Spacer()
             ZStack {
                 Circle()
-                    .stroke(winColor, lineWidth: 14)
+                    .stroke(colorOfCircle, lineWidth: 14)
                     .scaleEffect(0.96)
                     
                 HStack {
@@ -67,6 +66,9 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         playerHand = "✊"
+                        compareHands()
+                        winOrLoseColor()
+                        detectHighscore()
                     }, label: {
                         Text("✊")
                             .font(.system(size: 80))
@@ -74,6 +76,9 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         playerHand = "✋"
+                        compareHands()
+                        winOrLoseColor()
+                        detectHighscore()
                     }, label: {
                         Text("✋")
                             .font(.system(size: 80))
@@ -81,6 +86,9 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         playerHand = "✌️"
+                        compareHands()
+                        winOrLoseColor()
+                        detectHighscore()
                     }, label: {
                         Text("✌️")
                             .font(.system(size: 80))
@@ -103,10 +111,48 @@ struct ContentView: View {
         .padding()
     }
     
-    func compareAiStepWith(HumanStep _: String) {
+    func compareHands() {
         let hands = ["✊", "✋", "✌️"]
-        let aiStep = hands.randomElement()
+        aiHand = hands.randomElement()!
         
+        if (playerHand == aiHand) {
+            result = "draw"
+        } else {
+            switch (playerHand, aiHand) {
+            case ("✌️", "✋"):
+                result = "win"
+                score += 1
+            case ("✊", "✌️"):
+                result = "win"
+                score += 1
+            case ("✋", "✊"):
+                result = "win"
+                score += 1
+            default:
+                result = "lose"
+            }
+        }
+        
+    }
+    
+    func winOrLoseColor() {
+        let winColor = Color(.systemGreen)
+        let loseColor = Color(.systemRed)
+        let drawColor = Color(.lightGray)
+        
+        if result == "win" {
+            colorOfCircle = winColor
+        } else if result == "draw" {
+            colorOfCircle = drawColor
+        } else {
+            colorOfCircle = loseColor
+        }
+    }
+    
+    func detectHighscore() {
+        if score > highscore {
+            highscore += 1
+        }
     }
 }
 
