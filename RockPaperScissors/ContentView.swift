@@ -8,112 +8,105 @@
 import SwiftUI
 
 struct ContentView: View {
-    var score = 0
-    var highscore = 0
+    
+    @State private var score = 0
+    @State private var highscore = 0
+    @State private var playerHand = "✊"
+    @State private var aiHand = "✌️"
+    @State private var result = true
+    private let winColor = Color(.systemGreen)
+    private let loseColor = Color(.systemRed)
     
     var body: some View {
         VStack {
             HStack {
                 Text("✊")
-                    .font(.largeTitle)
+                    .font(.title)
                 Text("✋")
-                    .font(.largeTitle)
+                    .font(.title)
                 Text("✌️")
-                    .font(.largeTitle)
+                    .font(.title)
             }
-            
             Text("The game")
-                .font(.title)
+                .font(.title2)
                 .fontWeight(.semibold)
-            
+            Divider()
+                .frame(width: 1000.0)
+                .ignoresSafeArea()
             Spacer()
-            
             ZStack {
                 Circle()
-                    .foregroundColor(.green)
-                
-                Circle()
-                    .foregroundColor(.white)
-                    .scaleEffect(0.92)
-                
+                    .stroke(winColor, lineWidth: 14)
+                    .scaleEffect(0.96)
+                    
                 HStack {
                     Spacer()
-                    
                     VStack {
-                        Text("✊")
+                        Text(playerHand)
                             .font(.system(size: 120))
                             .padding(.bottom)
                         Text("You")
                             .font(.title)
                             .fontWeight(.heavy)
-                            .foregroundColor(Color.black)
                     }
-                    
                     Spacer()
-                    
                     VStack {
-                        Text("✌️")
+                        Text(aiHand)
                             .font(.system(size: 120))
                             .padding(.bottom)
                         Text("AI")
                             .font(.title)
                             .fontWeight(.heavy)
-                            .foregroundColor(Color.black)
                     }
-                    
                     Spacer()
                 }
             }
-            
             Spacer()
-            
             VStack {
                 HStack {
                     Spacer()
-                    
                     Button(action: {
-                        
+                        playerHand = "✊"
                     }, label: {
                         Text("✊")
                             .font(.system(size: 80))
                     })
-                    
                     Spacer()
-                    
                     Button(action: {
-                        
+                        playerHand = "✋"
                     }, label: {
                         Text("✋")
                             .font(.system(size: 80))
                     })
                     Spacer()
-                    
                     Button(action: {
-                        
+                        playerHand = "✌️"
                     }, label: {
                         Text("✌️")
                             .font(.system(size: 80))
                     })
-                    
                     Spacer()
-                    
                 }
                 .padding(.bottom)
-                
                 Text("Choose next")
             }
-            
             Spacer()
-            
             Divider()
+                .frame(width: 1000.0)
+                .ignoresSafeArea()
                 .padding(.bottom)
-                
             VStack {
                 Text("Current score is \(score)")
                 Text("Your highscore is \(highscore)")
             }
         }
         .padding()
+    }
+    
+    func compareAiStepWith(HumanStep _: String) {
+        let hands = ["✊", "✋", "✌️"]
+        let aiStep = hands.randomElement()
+        
     }
 }
 
